@@ -5,14 +5,13 @@
 #define SENSOR 34
 const char* ssid = "Redmii_i";
 const char* password = "Stacker30";
-const char* serverName = "http://192.168.102.112:5000/data"; // Ganti dengan IP server Flask
+const char* serverName = "http://192.168.102.112:5000/data"; 
 
 void setup()
 {
    Serial.begin(115200);
    delay(2000);
 
-   // Koneksi ke WiFi
    WiFi.begin(ssid, password);
    while (WiFi.status() != WL_CONNECTED) {
        delay(1000);
@@ -33,14 +32,11 @@ void loop()
     if (WiFi.status() == WL_CONNECTED) {
         HTTPClient http;
 
-        // Buat URL untuk POST
         http.begin(serverName);
         http.addHeader("Content-Type", "application/json");
 
-        // Data JSON yang akan dikirim
         String jsonPayload = "{\"air_quality\": " + String(air_quality) + "}";
 
-        // Kirim POST request
         int httpResponseCode = http.POST(jsonPayload);
 
         if (httpResponseCode > 0) {
