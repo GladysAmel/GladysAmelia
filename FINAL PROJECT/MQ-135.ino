@@ -8,7 +8,7 @@
 
 const char* ssid = "Redmii_i";
 const char* password = "Stacker30";
-const char* serverName = "http://192.168.42.184:5000/data"; 
+const char* serverName = "http://192.168.196.184:5000/data"; 
 
 void setup() {
   Serial.begin(115200);
@@ -35,11 +35,11 @@ void loop() {
   if (ppm > 10) { 
     digitalWrite(BUZZER_PIN1, HIGH);
     digitalWrite(BUZZER_PIN2, HIGH);
-    delay(0);
+    delay(5000);
 
     digitalWrite(BUZZER_PIN1, LOW);
     digitalWrite(BUZZER_PIN2, LOW);
-    delay(50);
+    delay(500);
   } else {
     digitalWrite(BUZZER_PIN1, LOW);
     digitalWrite(BUZZER_PIN2, LOW);
@@ -66,5 +66,5 @@ void loop() {
     Serial.println("WiFi Disconnected");
   }
 
-  delay(2500); 
+  delay(1000); 
 }

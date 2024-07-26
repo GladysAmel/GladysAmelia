@@ -1,11 +1,12 @@
 import streamlit as st
 import pandas as pd
 import requests
+from streamlit_autorefresh import st_autorefresh
 
 st.title("Kualitas Udara Toilet SMAN 8 Samarinda")
 st.write("Hasil Pemantauan kualitas udara di toilet SMA Negeri 8 Samarinda")
 
-url = "http://192.168.42.184:5000/data"
+url = "http://192.168.196.184:5000/data"
 
 @st.cache_data(ttl=60)
 def load_data():
@@ -15,6 +16,9 @@ def load_data():
 def delete_all_data():
     response = requests.delete(url)
     return response.json()
+
+# Auto-refresh setiap 10 detik
+count = st_autorefresh(interval=1 * 1000, key="data_refresh")
 
 data = load_data()
 
@@ -49,5 +53,3 @@ with col2:
             st.line_chart(df.set_index('timestamp'))
         else:
             st.write("No data available")
-
-        
